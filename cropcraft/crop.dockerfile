@@ -11,7 +11,7 @@ FROM systemd AS snapd
 RUN apt update && apt install -y snapd && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install Blender using Snap
-RUN snap install blender --channel=4.0/stable --classic
+#RUN snapd install blender --channel=4.0/stable --classic
 
 # Copy the source code into the container
 COPY src /app/src
