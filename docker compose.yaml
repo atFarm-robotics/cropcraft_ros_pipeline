@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+
+  blender:
+    build:
+      context: ./blender
+      dockerfile: Dockerfile.blender
+    container_name: blender
+    networks:
+      - blender_net
+
+  ros:
+    build:
+      context: ./ros
+      dockerfile: Dockerfile.ros
+    container_name: ros_noetic  
+    networks:
+      - python_net
+    depends_on:
+      - python
+    environment:
+      - PYTHON_HOST=python
+    volumes: 
+      - ./src:/root/catkin_ws/src/
+    
+
+  python:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    container_name: python
+    networks:
+      - blender_net
+    depends_on:
+      - blender
+    environment:
+      - BLENDER_HOST=blender
+    volumes:
+      - ./src:/app/src
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    ports:
+      - 9443:9443
+      - 9000:9000
+    volumes:
+      - ./src/data:/data
+      - ./src/var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
+networks:
+  blender_net:
+    driver: bridge
+  ros_net:
+    driver: bridge
+
+
+
