@@ -23,15 +23,15 @@ services:
       - PYTHON_HOST=python
     volumes: 
       - ./src:/root/catkin_ws/src/
-    
 
   python:
     build:
-      context: .
+      context: ./cropcraft
       dockerfile: Dockerfile.python
     container_name: python
     networks:
       - blender_net
+      - python_net
     depends_on:
       - blender
     environment:
@@ -45,14 +45,14 @@ services:
       - 9443:9443
       - 9000:9000
     volumes:
-      - ./src/data:/data
-      - ./src/var/run/docker.sock:/var/run/docker.sock
+      - ./portainer/src/data:/data
+      - ./portainer/src/var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
 
 networks:
   blender_net:
     driver: bridge
-  ros_net:
+  python_net:
     driver: bridge
 
 

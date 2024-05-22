@@ -1,3 +1,18 @@
+## Comandos
+
+### Iniciar docker caso não esteja
+
+~~~bash
+
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo systemctl status docker
+
+
+docker compose -f "dockercompose.yaml" up -d --build
+
+~~~ 
+
 # CropCraft
 
 CropCraft is a python script that generates 3D models of crop fields, specialized in
