@@ -1,0 +1,1 @@
+{Mesa/llvmpipe (LLVM 15.0.7, 256 bits)/4.5 (Core Profile) Mesa 23.2.1-1ubuntu3.1~22.04.2}=SUPPORTED

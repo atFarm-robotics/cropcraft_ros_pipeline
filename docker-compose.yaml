@@ -49,7 +49,7 @@ services:
     environment:
       - BLENDER_HOST=blender
     volumes:
-      - ./cropcraft/src:/app/src
+      - ./cropcraft/src:/usr/src/app/src
 
   portainer:
     image: portainer/portainer-ce:latest
