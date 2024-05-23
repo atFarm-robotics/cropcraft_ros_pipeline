@@ -3,12 +3,24 @@ version: '3.8'
 services:
 
   blender:
-    build:
-      context: ./blender
-      dockerfile: Dockerfile.blender
+    image: lscr.io/linuxserver/blender:latest
+    # build:
+    #   context: ./blender
+    #   dockerfile: Dockerfile.blender
     container_name: blender
-    networks:
-      - blender_net
+    # security_opt:
+    #   - seccomp:unconfined #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      # - SUBFOLDER=/ #optional
+    volumes:
+      - ./blender/src:/config
+    ports:
+      - 3000:3000
+      - 3001:3001
+    restart: unless-stopped
 
   ros:
     build:
@@ -22,7 +34,7 @@ services:
     environment:
       - PYTHON_HOST=python
     volumes: 
-      - ./src:/root/catkin_ws/src/
+      - ./ros/src:/root/catkin_ws/src/
 
   python:
     build:
@@ -37,7 +49,7 @@ services:
     environment:
       - BLENDER_HOST=blender
     volumes:
-      - ./src:/app/src
+      - ./cropcraft/src:/app/src
 
   portainer:
     image: portainer/portainer-ce:latest

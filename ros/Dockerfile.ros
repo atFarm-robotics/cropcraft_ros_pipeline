@@ -45,3 +45,5 @@ RUN echo "source /root/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
 # Set a CPU limit of 70% for the container
 CMD ["cpulimit", "--limit=70", "-i", "-e", "tail", "-f", "/dev/null"]
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
