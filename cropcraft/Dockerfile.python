@@ -1,6 +1,8 @@
 # Dockerfile.python
 
-FROM python:3
+FROM python:3.8.0
+
+USER root 
 
 # Copy source code
 COPY src usr/src/app/src
@@ -17,7 +19,11 @@ WORKDIR /usr/src/app/src
 # RUN pip install --no-cache-dir -r requirements.txt
 
 # Set the entrypoint command
-CMD ["python3", "/app/src/cropcraft.py", "examples/test1.yaml"]
+CMD ["python3", "cropcraft.py", "examples/test1.yaml"]
+
+# Comando com RUN 
+
+# RUN python3 cropcraft.py examples/test2.yaml
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
 
