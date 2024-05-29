@@ -13,6 +13,14 @@ docker compose -f "dockercompose.yaml" up -d --build
 
 ~~~ 
 
+### Caso o esteja com problemas ao encerrar um containers
+
+~~~bash 
+
+sudo aa-remove-unknown
+
+~~~
+
 # CropCraft
 
 CropCraft is a python script that generates 3D models of crop fields, specialized in
