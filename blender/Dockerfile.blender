@@ -1,0 +1,11 @@
+# Dockerfile.blender
+
+FROM lscr.io/linuxserver/blender:latest
+
+# Ensure snap binaries are in PATH
+ENV PATH=$PATH:/snap/bin
+
+# Start Blender in background
+CMD ["blender", "--background", "--python-expr", "import bpy; bpy.ops.wm.quit_blender()"]
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
