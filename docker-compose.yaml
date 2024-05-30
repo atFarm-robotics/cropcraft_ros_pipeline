@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+
+  blender:
+    image: lscr.io/linuxserver/blender:latest
+    # build:
+    #   context: ./blender
+    #   dockerfile: Dockerfile.blender
+    container_name: blender
+    # security_opt:
+    #   - seccomp:unconfined #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      # - SUBFOLDER=/ #optional
+    volumes:
+      - ./blender/src:/config
+    ports:
+      - 3000:3000
+      - 3001:3001
+    restart: unless-stopped
+
+  ros:
+    build:
+      context: ./ros
+      dockerfile: Dockerfile.ros
+    container_name: ros_noetic  
+    networks:
+      - python_net
+    depends_on:
+      - python
+    environment:
+      - PYTHON_HOST=python
+    volumes: 
+      - ./ros/src:/root/catkin_ws/src/
+
+  cropcraft:
+    build:
+      context: ./cropcraft
+      dockerfile: Dockerfile.python
+    container_name: python
+    networks:
+      - blender_net
+      - python_net
+    depends_on:
+      - blender
+    environment:
+      - BLENDER_HOST=blender
+    volumes:
+      - ./cropcraft/src:/usr/src/app/src
+
+  # portainer:
+  #   image: portainer/portainer-ce:latest
+  #   ports:
+  #     - 9443:9443
+  #     - 9000:9000
+  #     - 8000:8000
+  #   volumes:
+  #     - ./portainer/src/data:/data
+  #     - ./portainer/src/var/run/docker.sock:/var/run/docker.sock
+  #   restart: unless-stopped
+
+networks:
+  blender_net:
+    driver: bridge
+  # cropcraft_net:
+  #   driver: bridge
+
+
