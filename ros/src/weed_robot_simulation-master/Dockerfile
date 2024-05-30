@@ -39,12 +39,12 @@ WORKDIR ${CATKIN_WS}
 RUN catkin init
 
 # Copy source
-COPY ./src/weed_robot_description ./src/weed_robot_description/
-COPY ./src/weed_robot_gazebo ./src/weed_robot_gazebo/
-COPY ./src/weed_robot_navigation ./src/weed_robot_navigation/ 
+COPY ./weed_robot_description ./src/weed_robot_description/
+COPY ./weed_robot_gazebo ./src/weed_robot_gazebo/
+COPY ./weed_robot_navigation ./src/weed_robot_navigation/ 
 
 # Copy docker scripts
-COPY ./src/docker_scripts ./docker_scripts/
+COPY ./docker_scripts ./docker_scripts/
 
 # Replace https://api.ignitionfuel.org by https://api.ignitionrobotics.org/ url in ignition configuration file
 RUN cat /usr/share/ignition/fuel_tools/config.yaml
