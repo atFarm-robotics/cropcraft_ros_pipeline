@@ -18,9 +18,6 @@ services:
     volumes:
       - ./blender/src/config:/config
       - ./blender/cropcraft:/cropcraft
-    ports:
-      - 3000:3000
-      - 3001:3001
     restart: unless-stopped 
 
   ros:

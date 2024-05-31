@@ -1,10 +1,5 @@
 # Dockerfile.blender
-
 FROM lscr.io/linuxserver/blender:latest
-
-# Root 
-
-USER root
 
 # Set environment variables
 ENV PATH=$PATH:/snap/bin
@@ -21,9 +16,11 @@ COPY cropcraft/src cropcraft
 WORKDIR /cropcraft/src
 
 # Install Python dependencies
-RUN python3 -m venv venv &&\
-    . ./venv/bin/activate &&\ 
-    pip install -r requirements.txt
+RUN python3 -m venv venv
+
+RUN . ./venv/bin/activate
+
+# RUN pip install -r requirements.txt
 
 # # Set the entrypoint command
 # RUN python3 cropcraft.py examples/test3.yaml
