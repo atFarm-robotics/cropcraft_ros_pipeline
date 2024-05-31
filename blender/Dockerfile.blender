@@ -1,0 +1,38 @@
+# Dockerfile.blender
+
+FROM lscr.io/linuxserver/blender:latest
+
+# Set environment variables
+ENV PATH=$PATH:/snap/bin
+
+# Ensure Blender is in PATH
+RUN ln -s /usr/local/blender/blender /usr/bin/blender
+
+# Install dependencies
+RUN apt update &&\
+    apt install -y python3-pip &&\
+    pip install --upgrade pip
+
+# Copy source code
+COPY /src /app
+
+# Set working directory
+WORKDIR /app
+
+# Install virtual enviroment
+
+RUN apt install python3.10-venv
+
+# # Install Python dependencies
+RUN . ./venv/bin/activate &&\ 
+    pip install -r requirements.txt
+
+# Set the entrypoint command
+# CMD ["/bin/bash", "-c", ". ./venv/bin/activate && pip install -r requirements.txt && python3 cropcraft.py examples/test1.yaml"]
+
+# # Non stop container code
+
+# ENTRYPOINT ["tail", "-f", "/dev/null"]
+
+# Start Blender in background mode by default
+CMD ["blender", "--background"]

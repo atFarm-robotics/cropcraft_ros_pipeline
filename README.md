@@ -88,6 +88,7 @@ Some examples are available in the [`examples`](/examples) directory.
 Then you can execute the `cropcraft.py` script and specify the path of the chosen configuration
 file.
 ```
+. ./venv/bin/activate
 python3 cropcraft.py examples/test1.yaml
 ```
 This command will generate a blender file named `test1.blend` and a gazebo model named `test1`
@@ -97,9 +98,158 @@ Some options are available and described using
 python3 cropcraft.py --help
 ```
 
-# Ros (Melodic/Noetic)
+# Blender 
 
+[Blender](https://www.blender.org/) is a free and open-source 3D computer graphics software toolset used for creating animated films, visual effects, art, 3D printed models, motion graphics, interactive 3D applications, virtual reality, and computer games.
 
+## Aplication Setup 
+
+The application can be accessed at:
+
+- http://yourhost:3000/
+- https://yourhost:3001/
+
+## TimeZone
+
+* [List of tz database time zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List)
+
+## Suport Info 
+
+* Shell access whilst the container is running:
+
+~~~bash
+docker exec -it blender /bin/bash
+~~~
+
+* To monitor the logs of the container in realtime:
+
+~~~bash
+docker logs -f blender
+~~~
+
+Container version number:
+
+~~~bash
+docker inspect -f '{{ index .Config.Labels "build_version" }}' blender
+~~~
+
+Image version number:
+
+~~~bash
+docker inspect -f '{{ index .Config.Labels "build_version" }}' lscr.io/linuxserve
+~~~
+
+## User / Group Identifiers
+
+When using volumes (-v flags), permissions issues can arise between the host OS and the container, we avoid this issue by allowing you to specify the user PUID and group PGID.
+
+Ensure any volume directories on the host are owned by the same user you specify and any permissions issues will vanish like magic.
+
+In this instance PUID=1000 and PGID=1000, to find yours use id your_user as below:
+
+> id your_user
+
+Example output:
+
+> uid=1000(your_user) gid=1000(your_user) groups=1000(your_user)
+
+# Ros - Weed Robot Simulation (Melodic/Noetic)
+
+Simulation of the soybean crop weeding robot developed by CIFASIS.
+
+## Video
+
+<a href="https://youtu.be/NlTgNNLH3LA" target="_blank">
+  <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/6648400/260785714-3ec3388d-eb23-4e74-a1d2-6f0e85e57144.png" alt="weed_robot_simulation" width="700" />
+</a>
+
+## License
+
+weed_robot_simulation is released under BSD-2-Clause license.
+
+If you use weed_robot_simulation in an academic work, please cite:
+
+@article{ait2023travelling,  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  title = {{A Travelling Salesman Problem Approach to Efficiently Navigate Crop Row Fields with a Car-Like Robot}},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  author = {Ait, Ismael and Kofman, Ernesto and Pire, Taih{\\'u}},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  journal = {IEEE Latin America Transactions},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  volume = {21},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  number = {5},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  pages = {643-–651},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  month = {April},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  year = {2023},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  issn = {1548-0992},  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  url = {https://latamt.ieeer9.org/index.php/transactions/article/view/7751} 
+  
+}
+
+## Installation with Docker
+
+### Dependencies
+
+Install docker using apt and not the snap package.
+
+```
+sudo apt install docker.io
+```
+
+Install rocker
+
+```
+sudo apt-get install python3-rocker
+```
+
+Install Nvidia GPU and GUI support packages
+
+```
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+	
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+
+curl -s -L https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+
+sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+```
+
+Restart docker daemon
+
+```
+sudo systemctl restart docker
+```
+
+### Build docker container
+
+```
+docker build . --tag navigation:latest
+```
+
+## Running
+
+Run docker image
+
+```
+rocker --nvidia --x11 navigation:latest
+```
+
+In the opened shell run the navigation script *weed_robot.sh*, for example:
+
+```
+src/weed_robot_navigation/bin/weed_robot.sh -n -s -g -v -w field -m field \
+	-t "[3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]" \
+	-p "-x -14.56 -y -12.0 -Y 1.570796327"
+```
 
 
 ## Observação

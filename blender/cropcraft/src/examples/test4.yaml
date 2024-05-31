@@ -1,0 +1,22 @@
+output:
+  blender:
+    type: blender_file
+    filename: test4.blend
+
+field:
+  headland_width: 1.
+  swath_width: 0.3
+  plant_distance: .2
+  plants_count: 10
+  plant_type: maize
+  row_distance: 0.
+
+  swaths:
+    swath1: { plant_height: .05 }
+    swath2: { plant_height: .10 }
+    swath3: { plant_height: .15 }
+    swath4: { plant_height: .20 }
+    swath5: { plant_height: .25 }
+    swath6: { plant_height: .30 }
+    swath7: { plant_height: .35 }
+    swath8: { plant_height: .40 }

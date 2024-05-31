@@ -1,55 +1,56 @@
 version: '3.8'
 
 services:
-
   blender:
-    image: lscr.io/linuxserver/blender:latest
-    # build:
-    #   context: ./blender
-    #   dockerfile: Dockerfile.blender
-    container_name: blender
+    build:
+      context: ./blender
+      dockerfile: Dockerfile.blender
+    container_name: blender_cropcraft 
     # security_opt:
     #   - seccomp:unconfined #optional
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+    environment: 
+      - PUID=1000 # 
+      - PGID=1000 # 
+      - TZ=America/Sao_Paulo # Time Zone
       # - SUBFOLDER=/ #optional
+    # networks:
+    #  - ros_net
     volumes:
-      - ./blender/src:/config
+      - ./blender/src/config:/config
+      - ./blender/src/cropcraft:/app
     ports:
       - 3000:3000
       - 3001:3001
-    restart: unless-stopped
+    restart: unless-stopped 
 
-  ros:
-    build:
-      context: ./ros
-      dockerfile: Dockerfile.ros
-    container_name: ros_noetic  
-    networks:
-      - python_net
-    depends_on:
-      - python
-    environment:
-      - PYTHON_HOST=python
-    volumes: 
-      - ./ros/src:/root/catkin_ws/src/
+  # cropcraft:
+  #   build:
+  #     context: ./cropcraft
+  #     dockerfile: Dockerfile.python
+  #   container_name: cropcraft
+  #   networks:
+  #     - blender_net
+  #   depends_on:
+  #     - blender
+  #   environment:
+  #     - BLENDER_HOST=blender
+  #   volumes:
+  #     - ./cropcraft/src:/usr/src/app/src
+  #     - blender_data:/usr/src/app/src
 
-  cropcraft:
-    build:
-      context: ./cropcraft
-      dockerfile: Dockerfile.python
-    container_name: python
-    networks:
-      - blender_net
-      - python_net
-    depends_on:
-      - blender
-    environment:
-      - BLENDER_HOST=blender
-    volumes:
-      - ./cropcraft/src:/usr/src/app/src
+  # ros:
+  #   build:
+  #     context: ./ros
+  #     dockerfile: Dockerfile.ros
+  #   container_name: ros_noetic  
+  #   networks:
+  #     - python_net
+  #   depends_on:
+  #     - python
+  #   environment:
+  #     - PYTHON_HOST=python
+  #   volumes: 
+  #     - ./ros/src:/root/catkin_ws/src/
 
   # portainer:
   #   image: portainer/portainer-ce:latest
@@ -63,9 +64,5 @@ services:
   #   restart: unless-stopped
 
 networks:
-  blender_net:
+  ros_net:
     driver: bridge
-  # cropcraft_net:
-  #   driver: bridge
-
-
