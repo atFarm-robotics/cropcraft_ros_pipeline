@@ -17,40 +17,25 @@ services:
     #  - ros_net
     volumes:
       - ./blender/src/config:/config
-      - ./blender/src/cropcraft:/app
+      - ./blender/cropcraft:/cropcraft
     ports:
       - 3000:3000
       - 3001:3001
     restart: unless-stopped 
 
-  # cropcraft:
-  #   build:
-  #     context: ./cropcraft
-  #     dockerfile: Dockerfile.python
-  #   container_name: cropcraft
-  #   networks:
-  #     - blender_net
-  #   depends_on:
-  #     - blender
-  #   environment:
-  #     - BLENDER_HOST=blender
-  #   volumes:
-  #     - ./cropcraft/src:/usr/src/app/src
-  #     - blender_data:/usr/src/app/src
-
-  # ros:
-  #   build:
-  #     context: ./ros
-  #     dockerfile: Dockerfile.ros
-  #   container_name: ros_noetic  
-  #   networks:
-  #     - python_net
-  #   depends_on:
-  #     - python
-  #   environment:
-  #     - PYTHON_HOST=python
-  #   volumes: 
-  #     - ./ros/src:/root/catkin_ws/src/
+  ros:
+    build:
+      context: ./ros
+      dockerfile: Dockerfile.ros
+    container_name: ros
+    networks:
+      - blender_net
+    depends_on:
+      - blender
+    environment:
+      - PYTHON_HOST=blender
+    volumes: 
+      - ./ros/src:/root/catkin_ws/src/
 
   # portainer:
   #   image: portainer/portainer-ce:latest
@@ -64,5 +49,5 @@ services:
   #   restart: unless-stopped
 
 networks:
-  ros_net:
+  blender_net:
     driver: bridge
