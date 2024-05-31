@@ -1,0 +1,206 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <model name="cropcraft_test3">
+    <static>true</static>
+    <link name="ground">
+      <visual name="ground">
+        <geometry>
+          <mesh>
+            <uri>model://cropcraft_test3/meshes/ground.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://cropcraft_test3/materials/ground.material</uri>
+            <name>ground</name>
+          </script>
+        </material>
+      </visual>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://cropcraft_test3/meshes/ground.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact/>
+        </surface>
+        <laser_retro>0.0</laser_retro>
+      </collision>
+    </link>
+    <link name="swath1">
+      <visual name="swath1">
+        <geometry>
+          <mesh>
+            <uri>model://cropcraft_test3/meshes/swath1.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://cropcraft_test3/materials/swath1.material</uri>
+            <name>swath1</name>
+          </script>
+        </material>
+      </visual>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://cropcraft_test3/meshes/swath1.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_without_contact>true</collide_without_contact>
+            <collide_bitmask>0x00</collide_bitmask>
+          </contact>
+        </surface>
+        <laser_retro>1.0</laser_retro>
+      </collision>
+    </link>
+    <link name="swath2">
+      <visual name="swath2">
+        <geometry>
+          <mesh>
+            <uri>model://cropcraft_test3/meshes/swath2.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://cropcraft_test3/materials/swath2.material</uri>
+            <name>swath2</name>
+          </script>
+        </material>
+      </visual>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://cropcraft_test3/meshes/swath2.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_without_contact>true</collide_without_contact>
+            <collide_bitmask>0x00</collide_bitmask>
+          </contact>
+        </surface>
+        <laser_retro>2.0</laser_retro>
+      </collision>
+    </link>
+    <link name="portulaca">
+      <visual name="portulaca">
+        <geometry>
+          <mesh>
+            <uri>model://cropcraft_test3/meshes/portulaca.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://cropcraft_test3/materials/portulaca.material</uri>
+            <name>portulaca</name>
+          </script>
+        </material>
+      </visual>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://cropcraft_test3/meshes/portulaca.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_without_contact>true</collide_without_contact>
+            <collide_bitmask>0x00</collide_bitmask>
+          </contact>
+        </surface>
+        <laser_retro>-1.0</laser_retro>
+      </collision>
+    </link>
+    <link name="polygonum">
+      <visual name="polygonum">
+        <geometry>
+          <mesh>
+            <uri>model://cropcraft_test3/meshes/polygonum.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://cropcraft_test3/materials/polygonum.material</uri>
+            <name>polygonum</name>
+          </script>
+        </material>
+      </visual>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://cropcraft_test3/meshes/polygonum.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_without_contact>true</collide_without_contact>
+            <collide_bitmask>0x00</collide_bitmask>
+          </contact>
+        </surface>
+        <laser_retro>-2.0</laser_retro>
+      </collision>
+    </link>
+    <link name="taraxacum">
+      <visual name="taraxacum">
+        <geometry>
+          <mesh>
+            <uri>model://cropcraft_test3/meshes/taraxacum.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://cropcraft_test3/materials/taraxacum.material</uri>
+            <name>taraxacum</name>
+          </script>
+        </material>
+      </visual>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://cropcraft_test3/meshes/taraxacum.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_without_contact>true</collide_without_contact>
+            <collide_bitmask>0x00</collide_bitmask>
+          </contact>
+        </surface>
+        <laser_retro>-3.0</laser_retro>
+      </collision>
+    </link>
+    <link name="stones">
+      <visual name="stones">
+        <geometry>
+          <mesh>
+            <uri>model://cropcraft_test3/meshes/stones.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://cropcraft_test3/materials/stones.material</uri>
+            <name>stones</name>
+          </script>
+        </material>
+      </visual>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://cropcraft_test3/meshes/stones.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_without_contact>true</collide_without_contact>
+            <collide_bitmask>0x00</collide_bitmask>
+          </contact>
+        </surface>
+        <laser_retro>-0.5</laser_retro>
+      </collision>
+    </link>
+  </model>
+</sdf>

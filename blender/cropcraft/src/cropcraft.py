@@ -16,7 +16,6 @@ import click
 import os
 import subprocess
 
-
 @click.command(
     help='Generate a 3D model of an agriculutral field described using a YAML config file.')
 @click.argument('config_file', type=click.Path(exists=True, readable=True))
