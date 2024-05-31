@@ -88,7 +88,10 @@ Some examples are available in the [`examples`](/examples) directory.
 Then you can execute the `cropcraft.py` script and specify the path of the chosen configuration
 file.
 ```
+python3 -m venv venv
+
 . ./venv/bin/activate
+
 python3 cropcraft.py examples/test1.yaml
 ```
 This command will generate a blender file named `test1.blend` and a gazebo model named `test1`

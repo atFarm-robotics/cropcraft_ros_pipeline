@@ -8,6 +8,7 @@ sudo systemctl start docker
 sudo systemctl enable docker
 sudo systemctl status docker
 
-docker compose -f "dockercompose.yaml" up -d --build
+docker compose up -d --build
 
 ~~~ 
+
