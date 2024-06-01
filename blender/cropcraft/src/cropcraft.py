@@ -19,7 +19,7 @@ import subprocess
 @click.command(
     help='Generate a 3D model of an agriculutral field described using a YAML config file.')
 @click.argument('config_file', type=click.Path(exists=True, readable=True))
-@click.option('-d', '--output-dir', default='./gazebo/', type=click.Path(writable=True),
+@click.option('-d', '--output-dir', default='./gazebo', type=click.Path(writable=True),
               help='Set the destination path used by the configuration outputs.')
 @click.option('-f', '--foreground', is_flag=True, help='Open blender in foreground.')
 def main(config_file, output_dir, foreground):
