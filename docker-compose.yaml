@@ -1,72 +1,39 @@
 version: '3.8'
 
 services:
-
   blender:
-    image: lscr.io/linuxserver/blender:latest
-    # build:
-    #   context: ./blender
-    #   dockerfile: Dockerfile.blender
-    container_name: blender
+    build:
+      context: ./blender
+      dockerfile: Dockerfile.blender
+    container_name: blender_cropcraft 
     # security_opt:
     #   - seccomp:unconfined #optional
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+    environment: 
+      - PUID=1000 # 
+      - PGID=1000 # 
+      - TZ=America/Sao_Paulo # Time Zone
       # - SUBFOLDER=/ #optional
+    networks:
+      - blender_net
     volumes:
-      - ./blender/src:/config
-    ports:
-      - 3000:3000
-      - 3001:3001
-    restart: unless-stopped
+      - ./blender/src/config:/config
+      - ./blender/cropcraft:/cropcraft
+    restart: unless-stopped 
 
   ros:
     build:
-      context: ./ros
+      context: ./ros/weed_robot_simulation-master
       dockerfile: Dockerfile.ros
-    container_name: ros_noetic  
-    networks:
-      - python_net
-    depends_on:
-      - python
-    environment:
-      - PYTHON_HOST=python
-    volumes: 
-      - ./ros/src:/root/catkin_ws/src/
-
-  python:
-    build:
-      context: ./cropcraft
-      dockerfile: Dockerfile.python
-    container_name: python
+    container_name: ros
     networks:
       - blender_net
-      - python_net
     depends_on:
       - blender
     environment:
-      - BLENDER_HOST=blender
-    volumes:
-      - ./cropcraft/src:/usr/src/app/src
-
-  portainer:
-    image: portainer/portainer-ce:latest
-    ports:
-      - 9443:9443
-      - 9000:9000
-      - 8000:8000
-    volumes:
-      - ./portainer/src/data:/data
-      - ./portainer/src/var/run/docker.sock:/var/run/docker.sock
-    restart: unless-stopped
+      - PYTHON_HOST=blender
+    volumes: 
+      - ./ros/src:/root/catkin_ws/src/
 
 networks:
   blender_net:
     driver: bridge
-  python_net:
-    driver: bridge
-
-
-

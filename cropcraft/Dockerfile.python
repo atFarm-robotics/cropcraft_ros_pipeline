@@ -21,3 +21,4 @@ CMD ["python3", "/app/src/cropcraft.py", "examples/test1.yaml"]
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
 
+

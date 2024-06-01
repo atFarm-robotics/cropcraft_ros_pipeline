@@ -1,3 +1,6 @@
 portainer/*
-cropcraft/src/venv*
-blender/src
+.project
+.pydevproject
+blender/cropcraft/src/venv*
+blender/src/*
+

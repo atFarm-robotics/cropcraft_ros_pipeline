@@ -1,11 +1,29 @@
 # Dockerfile.blender
-
 FROM lscr.io/linuxserver/blender:latest
 
-# Ensure snap binaries are in PATH
+# Set environment variables
 ENV PATH=$PATH:/snap/bin
 
-# Start Blender in background
-CMD ["blender", "--background", "--python-expr", "import bpy; bpy.ops.wm.quit_blender()"]
+# Install dependencies
+RUN apt update &&\
+    apt install -y python3-pip python3.10-venv cpulimit &&\
+    pip install --upgrade pip
+
+# Copy source code
+COPY cropcraft/src cropcraft
+
+# Set working directory
+WORKDIR /cropcraft/src
+
+# RUN . ./venv/bin/activate &&\
+#     pip install -r requirements.txt
+
+# Non stop container code
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
+
+# Set a CPU limit of 70% for the container
+# CMD ["cpulimit", "--limit=70", "-i", "-e", "tail", "-f", "/dev/null"]
+
+# # Start Blender in background mode by default
+# CMD ["blender", "--background"]
