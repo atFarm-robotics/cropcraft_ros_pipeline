@@ -18,6 +18,7 @@ services:
     volumes:
       - ./blender/src/config:/config
       - ./blender/cropcraft:/cropcraft
+      - blender_data:/cropcraft/src/gazebo
     restart: unless-stopped 
 
   ros:
@@ -33,7 +34,7 @@ services:
       - PYTHON_HOST=blender
     volumes: 
       - ./ros/src:/root/catkin_ws/src/
-
+      - blender_data:./src/gazebo_blender
 networks:
   blender_net:
     driver: bridge

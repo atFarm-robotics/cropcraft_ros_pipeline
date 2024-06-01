@@ -41,7 +41,8 @@ RUN catkin init
 # Copy source
 COPY ./weed_robot_description ./src/weed_robot_description/
 COPY ./weed_robot_gazebo ./src/weed_robot_gazebo/
-COPY ./weed_robot_navigation ./src/weed_robot_navigation/ 
+COPY ./weed_robot_navigation ./src/weed_robot_navigation/
+COPY ./gazebo_blender ./src/gazebo_blender
 
 # Copy docker scripts
 COPY ./docker_scripts ./docker_scripts/
