@@ -26,6 +26,7 @@ class Swaths:
 
     def __init__(self, field: config.Field):
         self.field = field
+        self.plant_diferent = 0
         self.swath_plant_groups = {}
         self.cur_swath_offset = 0.
         self.center_pos = mathutils.Vector()
@@ -92,9 +93,25 @@ class Swaths:
         plant_group = self.plant_mgr.get_group_by_height(swath.plant_type, swath.plant_height)
         group_height = plant_group.average_height()
 
+# Random Teste
+        self.plant_diferent = random.randint(1,19)
+        print(f"""
+
+Random number: {self.plant_diferent}
+
+Row: {swath.rows_count}
+
+Swath: {swath.name}
+
+Plant Group:{plant_group}
+****************************************************************
+               """)
+
         for swath_i, row_i, plant_i in id_tuples:
             if self.rand.random() < noise.missing:
                 continue
+
+            print(f"For plant: {plant_i}||Swaths: {swath_i}")
 
             x = swath.offset[0] + plant_i * swath.plant_distance
             y = swath.offset[1] + self.cur_swath_offset + swath_i * swath.swath_width + row_offset
@@ -105,8 +122,41 @@ class Swaths:
             y += self.rand.normalvariate(0, noise.position)
             vertices.append((x, y, z))
 
+            teste = swath.plant_height
+            # Test for new height into line
+            if plant_i == self.plant_diferent:
+                if swath.plant_type == 'bean':
+                    swath.plant_type = 'maize'
+                    swath.plant_height = 0.4
+                elif swath.plant_type == 'maize':
+                    swath.plant_type = 'bean'
+                    swath.plant_height = 0.2
+
+                print(f"""
+                 _________________________________________
+                |Random number: {self.plant_diferent}
+                |New plant type: {swath.plant_type}
+                |New plant height: {swath.plant_height}
+                |_________________________________________
+                       """)
+            else: 
+                swath.plant_height = teste
+
+            plant_group = self.plant_mgr.get_group_by_height(swath.plant_type, swath.plant_height)
+            group_height = plant_group.average_height()
+
+            if plant_i == self.plant_diferent:
+                print(f"""
+
+New Plant Group: {plant_group}
+
+New Group height: {group_height}
+
+                      """)
+
             scale = swath.plant_height / group_height
             scale *= self.rand.lognormvariate(0, noise.scale)
+            print(f"Scale: {scale}\n\n")
             scales.append(scale)
 
             yaw = orientation_fn()
@@ -115,6 +165,10 @@ class Swaths:
             rotations.extend([roll, pitch, yaw])
 
         object = self.create_swath_object(vertices, swath.name, scales, rotations)
+        
+        print(f"""
+               Object: {object}
+               """)
 
         cur_width = swath.swaths_count * swath.swath_width
         self.width = max(self.width, self.cur_swath_offset + cur_width)

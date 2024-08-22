@@ -1,0 +1,35 @@
+output:
+  blender:
+    type: blender_file
+    filename: tree1.blend
+
+  gazebo:
+    type: gazebo_model
+    name: tree1
+
+field:
+  swath_width: 1.5
+  swaths:
+    swath1:  
+      plant_type: tree
+      plant_height: .5 # .3
+      plant_distance: .10 # .14
+      row_distance: 1.5  # .75
+      plants_count: 1 #100
+      rows_count: 1 #2
+      swaths_count: 1 #2
+
+#    swath2:  
+#      plant_type: maize
+#      plant_height: .5 #.2
+#      plant_distance: .12 #.14
+#      row_distance: .5 #.325
+#      plants_count: 1 #100
+#      rows_count: 4 #4
+#      swaths_count: 5 #3
+
+  noise:
+    position: .009
+    tilt: .05
+    missing: .17
+    scale: .08

@@ -1,0 +1,20 @@
+model_groups:
+  small:
+    minimal_height: 0.
+    models:
+      - filename: tree.obj
+        height: 0.1
+        width: 0.009
+  medium:
+    minimal_height: 0.
+    models:
+      - filename: tree.obj
+        height: 0.1
+        width: 0.009
+  big:
+    minimal_height: 0.
+    models:
+      - filename: tree.obj
+        height: 0.1
+        width: 0.009
+

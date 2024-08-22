@@ -19,11 +19,10 @@ WORKDIR /cropcraft/src
 #     pip install -r requirements.txt
 
 # Non stop container code
-
 ENTRYPOINT ["tail", "-f", "/dev/null"]
 
 # Set a CPU limit of 70% for the container
 # CMD ["cpulimit", "--limit=70", "-i", "-e", "tail", "-f", "/dev/null"]
 
-# # Start Blender in background mode by default
-# CMD ["blender", "--background"]
+# Start Blender in background mode by default
+CMD ["blender", "--background"]

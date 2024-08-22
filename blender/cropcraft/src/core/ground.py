@@ -127,6 +127,8 @@ class Ground:
         object = create_plane_object(weed.name, self.swaths.width, self.swaths.length,
                                      self.field.scattering_extra_width)
         weed_collection = bpy.data.collections[weed.plant_type]
+        
+        print(f"******Weed_Collection:{weed.plant_type}")
 
         object.modifiers.new('grid', 'REMESH')
 

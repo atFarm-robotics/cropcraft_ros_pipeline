@@ -22,6 +22,11 @@ WORKDIR $COLCON_WS
 # Copiar as fontes para o workspace
 COPY src $COLCON_WS/src
 
+# Copy source
+COPY ./src/weed_robot_simulation-master/weed_robot_description ./src/weed_robot_description/
+COPY ./src/weed_robot_simulation-master/weed_robot_gazebo ./src/weed_robot_gazebo/
+COPY ./src/weed_robot_simulation-master/weed_robot_navigation ./src/weed_robot_navigation/ 
+
 # Atualizar as fontes rosdep e instalar dependências
 # RUN rosdep init && \
 #    rosdep update && \
