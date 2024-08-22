@@ -23,34 +23,34 @@ services:
 
     restart: unless-stopped
     
-  ros:
-    build:
-      context: ./ros
-      dockerfile: Dockerfile.ros
-    container_name: ros
-    networks:
-      - blender_net
-    depends_on:
-      - blender
-    environment:
-      - PYTHON_HOST=blender
-    volumes:
-      - ./ros/src:/root/catkin_ws/src/
-      - ./ros/src/weed_robot_simulation-master/gazebo_blender:/src/gazebo_blender
-
-  ros2:
-    build:
-      context: ./ros2
-      dockerfile: Dockerfile.ros2
-    container_name: ros2
+#  ros:
+#    build:
+#      context: ./ros
+#      dockerfile: Dockerfile.ros
+#    container_name: ros
 #    networks:
 #      - blender_net
 #    depends_on:
 #      - blender
 #    environment:
 #      - PYTHON_HOST=blender
-    volumes:
-      - ./ros2/src:/root/colcon_ws
+#    volumes:
+#      - ./ros/src:/root/catkin_ws/src/
+#      - ./ros/src/weed_robot_simulation-master/gazebo_blender:/src/gazebo_blender
+
+#  ros2:
+#    build:
+#      context: ./ros2
+#      dockerfile: Dockerfile.ros2
+#    container_name: ros2
+#    networks:
+#      - blender_net
+#    depends_on:
+#      - blender
+#    environment:
+#      - PYTHON_HOST=blender
+#    volumes:
+#      - ./ros2/src:/root/colcon_ws
 
 networks:
   blender_net:
