@@ -16,7 +16,6 @@ import os
 
 from . import input_utils
 
-
 @dataclass
 class PlantModel:
     filename: str
@@ -24,7 +23,6 @@ class PlantModel:
     filepath: str = None
     width: float = None
     leaf_area: float = None
-
 
 @dataclass
 class PlantGroup:

@@ -21,7 +21,7 @@ services:
       - ./blender/src/config:/config
       - ./blender/cropcraft:/cropcraft
       - ./ros/weed_robot_simulation-master/gazebo_blender:/cropcraft/src/gazebo
-      - ./gazebo/src/simulation:/cropcraft/src/gazebo
+      - ./ros2/src/gazebo_blender:/src/gazebo_blender
     ports:
       - 3000:8000
       - 3001:8001
@@ -56,7 +56,7 @@ services:
       - PYTHON_HOST=blender
     volumes:
       - ./ros2/src:/root/colcon_ws
-       - ./ros/src/weed_robot_simulation-master/gazebo_blender:/src/gazebo_blender
+      - ./ros2/src/gazebo_blender:/src/gazebo_blender
 
 networks:
   blender_net:

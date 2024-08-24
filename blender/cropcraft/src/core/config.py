@@ -28,8 +28,10 @@ class Swath:
     offset: typing.List[float] = field(default_factory=lambda: [0., 0., 0.])
     y_function: typing.Callable[float, float] = lambda x: 0.
     orientation: str = 'random'
-
-
+    # Teste 
+    special_plants: str = None
+    
+    
 @dataclass
 class Noise:
     position: float = 0.

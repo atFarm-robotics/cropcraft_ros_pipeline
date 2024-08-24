@@ -29,6 +29,7 @@ def make_swath(name: str, data: dict, default=config.Swath(), allow_none=False):
 
     def get_element(field, default):
         value = data.get(field, default)
+        
         if not allow_none and value is None:
             raise ParserError(f"Missing element '{field}' and no default value")
         return value
@@ -44,7 +45,9 @@ def make_swath(name: str, data: dict, default=config.Swath(), allow_none=False):
     swath.shift_next_swath = get_element('shift_next_swath', default.shift_next_swath)
     swath.offset = get_element('offset', default.offset)
     swath.orientation = get_element('orientation', default.orientation)
-
+    #Teste
+    swath.special_plants = get_element('special_plants', default.special_plants)
+    
     if swath.orientation not in ['random', 'aligned', 'zero']:
         raise ParserError(f"The value '{swath.orientation}' is invalid for {name}.orientation")
 

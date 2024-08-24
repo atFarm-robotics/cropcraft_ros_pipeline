@@ -7,9 +7,9 @@ field:
   headland_width: 8.
   swath_width: 1.57
   y_function: '.2 * sin(x * tau / 15.)'
-  plants_count: 20
+  plants_count: 10
   swaths_count: 1
-  plant_distance: .15
+  plant_distance: .20
 
   swaths:
     swath1:  
@@ -17,18 +17,27 @@ field:
       plant_height: .12
       row_distance: .01
       rows_count: 1
-    swath2:  
-      plant_type: bean
-      plant_height: .2
-      row_distance: .20
-      rows_count: 1
+      special_plants:
+        - position: 5
+          plant_type: bean
+          plant_height: .2
+          row_distance: .01
+        - position: 7
+          plant_type: vine2
+          plant_height: .12
+          row_distance: .01
+    # swath2:  
+    #   plant_type: bean
+    #   plant_height: .2
+    #   row_distance: .20
+    #   rows_count: 1
     # swath3:  
-    #   plant_type: maize
+    #   plant_type: vine1
     #   plant_height: .52
     #   row_distance: .5233
     #   rows_count: 1
     # swath4:  
-    #   plant_type: maize
+    #   plant_type: vine2
     #   plant_height: .12
     #   row_distance: .45
     #   rows_count: 4
