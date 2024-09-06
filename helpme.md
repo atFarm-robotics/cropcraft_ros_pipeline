@@ -12,3 +12,14 @@ docker compose up -d --build
 
 ~~~ 
 
+
+## Comandos basicos 
+
+~~~bash
+
+docker image rm $(docker image ls -q)
+docker build . # Run dockerfile 
+docker run <image> . # Run container
+
+
+~~~
