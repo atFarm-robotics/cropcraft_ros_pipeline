@@ -88,23 +88,25 @@ class Swaths:
         vertices = []
         scales = []
         rotations = []
+        
+        print(f"\nSwath: {swath.name}\n")
 
         plant_group = self.plant_mgr.get_group_by_height(swath.plant_type, swath.plant_height)
         group_height = plant_group.average_height()
-        
-        print(f"\nSwath: {swath.name}\n")
+        print(f'\nFor(0): \nPlant Goup: {plant_group}\ngroup_height: {group_height}')
         
         if swath.special_plants or swath.special_plants is not None:
             for special_plants_i in swath.special_plants:
-                print(f"\nSpecial_plants: {special_plants_i['position']}")
-                print(f"\nSpecial_plants: {special_plants_i['plant_type']}")
-                print(f"\nSpecial_plants: {special_plants_i['plant_height']}")
-                print(f"\nSpecial_plants: {special_plants_i['row_distance']}")    
+                print(f"Position: {special_plants_i['position']}")
+                print(f"Tipo de Planta: {special_plants_i['plant_type']}")
+                print(f"Altura: {special_plants_i['plant_height']}")
+                print(f"Distancia entre plantas: {special_plants_i['row_distance']}")    
 
         for swath_i, row_i, plant_i in id_tuples:
             if self.rand.random() < noise.missing:
                 continue
             
+            print(f"\nSwath: {swath.name}\n")
             if swath.special_plants or swath.special_plants is not None:
                 print(f"\nSpecial_plants: {swath.special_plants}")
                 for special_plants_i in swath.special_plants:
@@ -112,7 +114,7 @@ class Swaths:
                          swath.plant_type = special_plants_i['plant_type']
                          swath.plant_height = special_plants_i['plant_height']
                          swath.row_distance = special_plants_i['row_distance']
-                         print(f'For(1): \nPlant Goup: {plant_group}\ngroup_height: {group_height}')
+                         print(f'\n\nFor(1): \nPlant Goup: {plant_group}\ngroup_height: {group_height}')
                          plant_group = self.plant_mgr.get_group_by_height(swath.plant_type, swath.plant_height)
                          group_height = plant_group.average_height()
                          print(f'For(2): \nPlant Goup: {plant_group}\ngroup_height: {group_height}')
@@ -128,10 +130,10 @@ class Swaths:
             y += self.rand.normalvariate(0, noise.position)
             vertices.append((x, y, z))
                 
-            print(f'For(Out1): \nPlant Goup: {plant_group}\ngroup_height: {group_height}')    
+            print(f'\n\nFor(Out1): \nPlant Goup: {plant_group}\ngroup_height: {group_height}')    
             plant_group = self.plant_mgr.get_group_by_height(swath.plant_type, swath.plant_height)
             group_height = plant_group.average_height()
-            print(f'For(Out2): \nPlant Goup: {plant_group}\ngroup_height: {group_height}')
+            print(f'\nFor(Out2): \nPlant Goup: {plant_group}\ngroup_height: {group_height}')
 
             scale = swath.plant_height / group_height
             scale *= self.rand.lognormvariate(0, noise.scale)

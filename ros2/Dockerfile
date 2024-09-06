@@ -1,0 +1,44 @@
+# Usar a imagem base do ROS 2 Foxy
+FROM osrf/ros:foxy-desktop
+
+# Definir variáveis de ambiente
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Atualizar e instalar pacotes necessários
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    git \
+    python3-colcon-common-extensions \
+    python3-pip \
+    python3-vcstool \
+    && rm -rf /var/lib/apt/lists/*
+
+# Criar um diretório de trabalho para o workspace
+ENV COLCON_WS=/root/colcon_ws
+RUN mkdir -p $COLCON_WS/src
+WORKDIR $COLCON_WS
+
+# Copiar as fontes para o workspace
+COPY src $COLCON_WS/src
+
+# # Copy source
+# COPY ./src/weed_robot_simulation-master/weed_robot_description ./src/weed_robot_description/
+# COPY ./src/weed_robot_simulation-master/weed_robot_gazebo ./src/weed_robot_gazebo/
+# COPY ./src/weed_robot_simulation-master/weed_robot_navigation ./src/weed_robot_navigation/ 
+
+# Atualizar as fontes rosdep e instalar dependências
+#  RUN rosdep init && \
+#      rosdep update && \
+#     rosdep install --from-paths src --ignore-src -r -y
+
+# Compilar o workspace
+RUN . /opt/ros/foxy/setup.sh && colcon build
+
+# Fonte o workspace
+RUN echo "source /opt/ros/foxy/setup.sh" >> /root/.bashrc
+RUN echo "source /root/colcon_ws/install/setup.sh" >> /root/.bashrc
+
+# Comando para manter o container rodando
+CMD ["bash"]
+
